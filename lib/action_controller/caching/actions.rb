@@ -171,14 +171,8 @@ module ActionController
           controller.content_type = Mime[cache_path.extension || :html]
         end
 
-        if ActionPack::VERSION::STRING < "4.1"
-          def render_to_string(controller, body)
-            controller.render_to_string(text: body, layout: true)
-          end
-        else
-          def render_to_string(controller, body)
-            controller.render_to_string(html: body.html_safe, layout: true)
-          end
+        def render_to_string(controller, body)
+          controller.render_to_string(text: body, layout: true)
         end
 
         private
