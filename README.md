@@ -1,3 +1,25 @@
+# Why Babylist has a fork
+
+
+**Note that master branch is not in use. See the `bl-v1.2.0` branch and the specific commit we reference in the bl/web Gemfile**
+
+Rationale:
+During our rails5 upgrade, this module needed to be updated since the version we were on (1.1.1) required <5 rails.
+
+1.2.0 had a bug that we encountered and you can read about it:
+- https://github.com/rails/actionpack-action_caching/pull/42
+- https://github.com/rails/actionpack-action_caching/pull/43
+
+Both PRs address the problem but rely on using `html_safe` which circumvents a lot of protections against XSS, etc.
+We weren't comfortable with that solution, and it seemed large. We basically wanted to keep the old behavior which
+changed in 1.2.0. Monkey patching was difficult due to inner classes and dynamic/conditional function definitions
+(depending on what version of actionpack you had)
+
+So we made the change you see on the branch and there you have it. If you need to add code to this branch, make sure you update the ref in the bl-web `Gemfile`.
+
+# Original Readme Follows
+
+
 actionpack-action_caching
 =========================
 
